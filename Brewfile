@@ -1,0 +1,6 @@
+brew 'chromedriver'
+brew 'geos'
+brew 'postgres'
+brew 'postgis'
+brew 'node'
+brew 'redis'

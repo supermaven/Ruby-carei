@@ -1,0 +1,49 @@
+.row
+  .col-sm-4
+    = f.input :start_address
+    = f.input :end_address
+    = f.input :avoid_highways, as: :boolean
+    = f.input :avoid_tolls, as: :boolean
+    .form-group
+      .d-flex.align-items-center
+        = f.button :button, t('.get_route'), class: 'btn-primary', type: 'button', id: 'get-route'
+        .spinner-border.text-primary.ml-2.itineraries-spinner#itineraries-spinner-j role='status'
+          span.sr-only = t('loading')
+    #map-error-j.d-none-soft.alert.alert-danger
+    #map-result-j.d-none-soft.alert.alert-info
+      = t('.distance')
+      b#distance<
+      br
+      = t('.duration')
+      b#duration<
+  .col-sm-8
+    .embed-responsive.embed-responsive-16by9.google-maps
+      .embed-responsive-item#new-itinerary-map *map_config_attributes
+    p#route-helper.d-none-soft
+      small
+        = Itinerary.human_attribute_name :start_location
+        b#from-helper
+        br
+        = Itinerary.human_attribute_name :end_location
+        b#to-helper
+        br
+        span#copyrights
+.row
+  .col-sm-4
+    h3
+      span.fas.fa-user-secret<>
+      = t('.hint_privacy_title')
+    p
+      = t('.hint_privacy_content')
+  .col-sm-4
+    h3
+      span.fas.fa-wrench<>
+      = t('.hint_customize_title')
+    p
+      = t('.hint_customize_content')
+  .col-sm-4
+    h3
+      span.fas.fa-search<>
+      = t('.hint_search_before_title')
+    p
+      = t('.hint_search_before_content_html', search_link: (link_to t('.search_link'), itineraries_path))
